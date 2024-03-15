@@ -23,6 +23,7 @@ namespace RegisterUserAssignment.Models
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage ="Passwords don't match")]
         public string ConfirmPassword { get; set; }
+        //public byte[] ProfilePicture { get; set; }
         public string ProfilePicture { get; set; }
     }
 }

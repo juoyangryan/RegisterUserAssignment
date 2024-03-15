@@ -26,8 +26,16 @@ namespace RegisterUserAssignment.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(User user)
+        public ActionResult Register(User user, HttpPostedFileBase profilePicture)
         {
+            //if (profilePicture != null && profilePicture.ContentLength > 0)
+            //{
+            //    using (var reader = new System.IO.BinaryReader(profilePicture.InputStream))
+            //    {
+            //        user.ProfilePicture = reader.ReadBytes(profilePicture.ContentLength);
+            //    }
+            //}
+
             if (ModelState.IsValid)
             {
 
@@ -35,7 +43,7 @@ namespace RegisterUserAssignment.Controllers
                 TempData["SuccessMessage"] = "User registered successfully!";
                 return RedirectToAction("AllUsers");
             }
-            return View("Index");
+            return View("Index", user);
         }
     }
 }

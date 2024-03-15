@@ -51,6 +51,8 @@ namespace RegisterUserAssignment.DAL
                 command.Parameters.AddWithValue("@Username", user.Username);
                 command.Parameters.AddWithValue("@Email", user.Email);
                 command.Parameters.AddWithValue("@Password", user.Password);
+                //command.Parameters.AddWithValue("@ProfilePic", user.ProfilePicture);
+
 
                 con.Open();
                 command.ExecuteNonQuery();

@@ -23,7 +23,10 @@
 </style>
 
 <div class="container-fluid">
-    <h2>Register as User</h2>
+    <div class="d-flex justify-content-between">
+        <h2>Register as User</h2>
+        @Html.ActionLink(" ", "AllUsers", "Registration", null, new { @class = "btn btn-close" })
+    </div>
     <hr />
 
     @using (Html.BeginForm("Register", "Registration", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
