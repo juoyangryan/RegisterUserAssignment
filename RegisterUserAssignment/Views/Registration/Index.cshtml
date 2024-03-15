@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "User Registration";
-    string successMessage = TempData["SuccessMessage"] as string;
     Html.EnableClientValidation(true);
 }
 
@@ -26,11 +25,6 @@
 <div class="container-fluid">
     <h2>Register as User</h2>
     <hr />
-
-    @if (!string.IsNullOrEmpty(successMessage))
-     {
-        <div class="alert alert-success">@successMessage</div>
-     }
 
     @using (Html.BeginForm("Register", "Registration", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
     {

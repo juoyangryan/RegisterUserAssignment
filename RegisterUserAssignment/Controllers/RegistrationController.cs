@@ -13,11 +13,16 @@ namespace RegisterUserAssignment.Controllers
     {
         UserDAL userDAL = new UserDAL();
 
-        private static List<User> users = new List<User>();
         // GET: Registration
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult AllUsers()
+        {
+            List<User> users = userDAL.GetUsers();
+            return View(users);
         }
 
         [HttpPost]
@@ -25,9 +30,10 @@ namespace RegisterUserAssignment.Controllers
         {
             if (ModelState.IsValid)
             {
-                users.Add(user);
+
+                userDAL.AddUser(user);
                 TempData["SuccessMessage"] = "User registered successfully!";
-                return RedirectToAction("Index");
+                return RedirectToAction("AllUsers");
             }
             return View("Index");
         }
