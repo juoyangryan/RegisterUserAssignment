@@ -1,5 +1,7 @@
 ﻿using BLL.Models;
 using DAL;
+using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace BLL
 {
@@ -11,17 +13,31 @@ namespace BLL
 
             UserDAL userDAL = new UserDAL();
 
-            foreach(DAL.Models.User entry in userDAL.GetUsers())
+            foreach (DAL.Models.User entry in userDAL.GetUsers())
             {
                 User user = new User
                 {
                     Username = entry.Username,
-                    Email = entry.Email,
-                    Password = entry.Password + " Some business logic"
+                    Email = entry.Email + " Some business logic",
+                    Password = entry.Password
                 };
                 users_bll.Add(user);
             }
             return users_bll;
+        }
+
+        public void AddUser(User user)
+        {
+            UserDAL userDAL = new UserDAL();
+
+            DAL.Models.User user_dal = new DAL.Models.User
+            {
+                Username = user.Username,
+                Email = user.Email,
+                Password = user.Password
+            };
+
+            userDAL.AddUser(user_dal);
         }
     }
 }
