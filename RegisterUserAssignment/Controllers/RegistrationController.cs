@@ -1,4 +1,4 @@
-﻿using RegisterUserAssignment.DAL;
+﻿using BLL;
 using RegisterUserAssignment.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace RegisterUserAssignment.Controllers
 {
     public class RegistrationController : Controller
     {
-        UserDAL userDAL = new UserDAL();
+        UserBLL userBLL = new UserBLL();
 
         // GET: Registration
         public ActionResult Index()
@@ -21,7 +21,19 @@ namespace RegisterUserAssignment.Controllers
 
         public ActionResult AllUsers()
         {
-            List<User> users = userDAL.GetUsers();
+            List<User> users = new List<User>();
+            List<BLL.Models.User> users_bll = userBLL.GetUsers();
+            foreach (BLL.Models.User entry in users_bll)
+            {
+                User user = new User
+                {
+                    Username = entry.Username,
+                    Email = entry.Email,
+                    Password = entry.Password, 
+                    ConfirmPassword = entry.Password
+                };
+                users.Add(user);
+            }
             return View(users);
         }
 
@@ -38,8 +50,13 @@ namespace RegisterUserAssignment.Controllers
 
             if (ModelState.IsValid)
             {
-
-                userDAL.AddUser(user);
+                BLL.Models.User user_bll = new BLL.Models.User
+                {
+                    Username = user.Username,
+                    Email = user.Email,
+                    Password = user.Password,
+                };
+                userBLL.AddUser(user_bll);
                 TempData["SuccessMessage"] = "User registered successfully!";
                 return RedirectToAction("AllUsers");
             }

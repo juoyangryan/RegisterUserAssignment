@@ -1,4 +1,4 @@
-﻿using RegisterUserAssignment.Models;
+﻿using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -6,11 +6,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace RegisterUserAssignment.DAL
+namespace DAL
 {
     public class UserDAL
     {
-        string conString = ConfigurationManager.ConnectionStrings["adoConnectionString"].ToString();
+        string conString = "Data Source=192.168.4.50,1433;database=ASPAssignment;user id=sa;password=dockerStrongPwd123;";
 
         public List<User> GetUsers()
         {
@@ -32,8 +32,7 @@ namespace RegisterUserAssignment.DAL
                         {
                             Username = reader["Username"].ToString(),
                             Email = reader["Email"].ToString(),
-                            Password = reader["Password"].ToString(),
-                            ConfirmPassword = reader["Password"].ToString()
+                            Password = reader["Password"].ToString()
                         };
                         userList.Add(user);
                     }
@@ -58,7 +57,5 @@ namespace RegisterUserAssignment.DAL
                 command.ExecuteNonQuery();
             }
         }
-
-
     }
 }
